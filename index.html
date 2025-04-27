@@ -1,136 +1,45 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portal Pengaduan dan Pelaporan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: rgb(255, 182, 193);
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 30px;
-      background: rgb(255, 246, 247);
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    label {
-      font-weight: bold;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pengaduan Ventwonic</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mengatur gaya link */
+        nav a {
+            color: yellow; /* Mengubah warna teks menjadi kuning */
+            text-decoration: none; /* Menghilangkan garis bawah */
+            margin: 0 15px; /* Menambahkan jarak horizontal antara link */
+            font-size: 24px; /* Membuat teks menjadi besar */
+            font-weight: bold; /* Membuat teks tebal (opsional) */
+        }
+
+        nav a:hover {
+            color: lightgray; /* Warna saat hover (opsional) */
+        }
+
+        /* Menambahkan jarak di main */
+        main {
+            margin-top: 50px; /* Menambahkan jarak ke bawah */
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Selamat Datang di Portal Pengaduan Kasus Kekerasan Ventwonic</h1>
-    <p>Wali Kelas: Any Hastuti S. Pd</p>
-    <p>Ketua Kelas: Nandira Almalieka</p>
-
-    <form id="laporanForm">
-      <label for="jenisLaporan">Jenis Pelaporan</label>
-      <select id="jenisLaporan" name="jenis_laporan" required>
-        <option value="">-- Pilih Kategori --</option>
-        <option value="Kekerasan">Kekerasan</option>
-        <option value="Pelecehan">Pelecehan</option>
-        <option value="Pembullyan">Pembullyan</option>
-      </select>
-
-      <label for="pelapor">Pelapor</label>
-      <select id="pelapor" name="pelapor" required>
-        <option value="">-- Pilih Kategori --</option>
-        <option value="Saksi">Saksi</option>
-        <option value="Korban">Korban</option>
-      </select>
-
-      <label for="waktu-kejadian">Waktu Kejadian (Opsional)</label>
-      <input type="date" id="tanggal-kejadian" name="tanggal" required>
-      <input type="time" id="waktu-kejadian" name="waktu" required>
-
-      <label for="lokasiKejadian">Lokasi Kejadian</label>
-      <select id="lokasiKejadian" name="lokasi_kejadian" required>
-        <option value="">-- Pilih Lokasi Kejadian --</option>
-        <option value="Masjid">Masjid</option>
-        <option value="Lapangan">Lapangan</option>
-        <option value="Ruang Kelas">Ruang Kelas</option>
-        <option value="Perpustakaan, Ruang Guru">Perpustakaan, Ruang Guru</option>
-        <option value="TU, PSB, R. KEPSEK, Koperasi">TU, PSB, R. KEPSEK, Koperasi</option>
-      </select>
-
-      <label for="deskripsi">Deskripsi Tambahan</label>
-      <textarea id="deskripsi" name="deskripsi" rows="5" required placeholder="Jelaskan secara rinci alur dari kasus yang Anda laporkan"></textarea>
-
-      <label for="bukti">Upload Bukti Pendukung</label>
-      <input type="file" id="bukti" name="file_upload" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.mp3,.mp4,.ppt,.pptx">
-
-      <p><strong>Kontak Pelapor (Opsional)</strong></p>
-
-      <label for="nama">Nama</label>
-      <input type="text" id="nama" name="nama" placeholder="Nama Anda" required>
-
-      <label for="kontak">Nomor Telepon/Email</label>
-      <input type="text" id="kontak" name="kontak" placeholder="Nomor telepon atau email Anda" required>
-
-      <button type="submit">Kirim Laporan</button>
-    </form>
-  </div>
-
-  <script>
-    document.getElementById("laporanForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const formData = new FormData();
-      formData.append("jenis_laporan", document.getElementById("jenisLaporan").value);
-      formData.append("pelapor", document.getElementById("pelapor").value);
-      formData.append("tanggal", document.getElementById("tanggal-kejadian").value);
-      formData.append("waktu", document.getElementById("waktu-kejadian").value);
-      formData.append("lokasi_kejadian", document.getElementById("lokasiKejadian").value);
-      formData.append("deskripsi", document.getElementById("deskripsi").value);
-      formData.append("nama", document.getElementById("nama").value);
-      formData.append("kontak", document.getElementById("kontak").value);
-
-      const files = document.getElementById("bukti").files;
-      for (let i = 0; i < files.length; i++) {
-        formData.append("file_upload", files[i]);
-      }
-
-      fetch("https://script.google.com/macros/s/AKfycbxHav42cGB8wZFaFSsX1CG3oGxD_gUpJLTnRuwOzFRCUO5T5_GQdojPDb7oKK085SF5NQ/exec", {
-        method: "POST",
-        body: formData,
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("✅ " + data.message);
-        document.getElementById("laporanForm").reset();
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("❌ Terjadi kesalahan saat mengirim laporan.");
-      });
-    });
-  </script>
+<body style="background-image: url('https://media.discordapp.net/attachments/978326481375735832/1356230006321320117/Ventwonic_Logo_Web_No_Watermarks.jpg?ex=67ebcf1f&is=67ea7d9f&hm=a797db1ba9914c4fa8ef462ef1c8141bb72d295dde19325d4b16e713451bc051&=&format=webp&width=1536&height=864'); background-size: cover; background-repeat: no-repeat; background-position: center -50px; background-attachment: fixed; color: white; text-align: center; padding: 50px; overflow: hidden">
+    <header style="margin-top: -20px;">
+        <h1>Portal Pengaduan</h1>
+        <nav style="margin-top: 100px;">
+            <a href="lapor-pembullyan.html">Pembullyan</a>
+            <a href="lapor-pelecehan.html">Pelecehan</a>
+            <a href="lapor-kekerasan.html">Kekerasan</a>
+        </nav>
+    </header>
+    <main style="padding-top: 410px;"> <!-- Menambahkan jarak untuk teks -->
+        <h2 style=color:rgb(255, 231, 233)>Selamat datang di Portal Pengaduan</h2>
+        <p style="color: rgb(250, 250, 250);">Silakan mendaftar atau masuk untuk mengajukan pengaduan.</p>
+    </main>
+    <footer>
+        <p style="margin-top: 117px;">© 2025 Ventwonic Portal</p>
+    </footer>
 </body>
 </html>
